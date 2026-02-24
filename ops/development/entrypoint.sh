@@ -1,11 +1,14 @@
 #!/bin/bash
 set -e
 
-echo "🚀 Starting Next.js development server..."
+echo "Starting Next.js development server..."
 
-if [ ! -d "node_modules" ]; then
-    echo "📦 Installing dependencies..."
+# Verifica se node_modules existe e se next está instalado
+if [ ! -d "node_modules" ] || [ ! -f "node_modules/.bin/next" ]; then
+    echo "Installing dependencies..."
     npm install
+else
+    echo "Dependencies already installed"
 fi
 
 exec npm run dev
