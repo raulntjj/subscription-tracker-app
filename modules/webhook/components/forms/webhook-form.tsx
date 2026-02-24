@@ -1,20 +1,26 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-import { useTranslation } from '@/modules/shared/hooks/use-translation';
-import { applyValidationErrors } from '@/modules/shared/lib/api-error';
-import { useCreateWebhook, useUpdateWebhook } from '@/modules/webhook/hooks/use-commands';
-import { type WebhookFormData, webhookSchema } from '@/modules/webhook/lib/validations/webhook';
-import { type WebhookConfig } from '@/modules/webhook/types/webhook-types';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Loader2 } from 'lucide-react';
-import { Controller, useForm } from 'react-hook-form';
+import { useTranslation } from "@/modules/shared/hooks/use-translation";
+import { applyValidationErrors } from "@/modules/shared/lib/api-error";
+import {
+  useCreateWebhook,
+  useUpdateWebhook,
+} from "@/modules/webhook/hooks/use-commands";
+import {
+  type WebhookFormData,
+  webhookSchema,
+} from "@/modules/webhook/lib/validations/webhook";
+import { type WebhookConfig } from "@/modules/webhook/types/webhook-types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
+import { Controller, useForm } from "react-hook-form";
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 
 type Props = {
   initialData?: WebhookConfig | null;
@@ -37,17 +43,17 @@ export function WebhookForm({ initialData, onClose }: Props) {
   } = useForm<WebhookFormData>({
     resolver: zodResolver(webhookSchema),
     defaultValues: {
-      url: '',
-      secret: '',
+      url: "",
+      secret: "",
       is_active: true,
     },
   });
 
   useEffect(() => {
     if (initialData) {
-      setValue('url', initialData.url);
-      setValue('secret', '');
-      setValue('is_active', initialData.is_active);
+      setValue("url", initialData.url);
+      setValue("secret", "");
+      setValue("is_active", initialData.is_active);
     }
   }, [initialData, setValue]);
 
@@ -71,26 +77,47 @@ export function WebhookForm({ initialData, onClose }: Props) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <Label htmlFor="url">{t('webhookUrl')}</Label>
-        <Input id="url" type="url" {...register('url')} aria-invalid={!!errors.url} />
-        {errors.url && <p className="text-xs text-destructive">{errors.url.message}</p>}
+        <Label htmlFor="url">{t("webhookUrl")}</Label>
+        <Input
+          id="url"
+          type="url"
+          {...register("url")}
+          aria-invalid={!!errors.url}
+        />
+        {errors.url && (
+          <p className="text-xs text-destructive">{errors.url.message}</p>
+        )}
       </div>
 
       <div className="flex flex-col gap-2">
         <Label htmlFor="secret">
-          {t('secret')} <span className="text-xs text-muted-foreground">({t('optional')})</span>
+          {t("secret")}{" "}
+          <span className="text-xs text-muted-foreground">
+            ({t("optional")})
+          </span>
         </Label>
-        <Input id="secret" type="password" {...register('secret')} aria-invalid={!!errors.secret} />
-        {errors.secret && <p className="text-xs text-destructive">{errors.secret.message}</p>}
+        <Input
+          id="secret"
+          type="password"
+          {...register("secret")}
+          aria-invalid={!!errors.secret}
+        />
+        {errors.secret && (
+          <p className="text-xs text-destructive">{errors.secret.message}</p>
+        )}
       </div>
 
       <div className="flex items-center justify-between">
-        <Label htmlFor="is_active">{t('isActive')}</Label>
+        <Label htmlFor="is_active">{t("isActive")}</Label>
         <Controller
           control={control}
           name="is_active"
           render={({ field }) => (
-            <Switch id="is_active" checked={field.value} onCheckedChange={field.onChange} />
+            <Switch
+              id="is_active"
+              checked={field.value}
+              onCheckedChange={field.onChange}
+            />
           )}
         />
       </div>
@@ -100,12 +127,12 @@ export function WebhookForm({ initialData, onClose }: Props) {
           {isPending ? (
             <>
               <Loader2 className="size-4 animate-spin" />
-              {isEdit ? t('saving') : t('creating')}
+              {isEdit ? t("saving") : t("creating")}
             </>
           ) : isEdit ? (
-            t('save')
+            t("save")
           ) : (
-            t('create')
+            t("create")
           )}
         </Button>
       </div>

@@ -1,34 +1,35 @@
-import type { ApiResponse } from '@/modules/shared/types/api-types';
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import type { ApiResponse } from "@/modules/shared/types/api-types";
+import axios from "axios";
+import Cookies from "js-cookie";
 
-export const TOKEN_COOKIE_KEY = 'access_token';
+export const TOKEN_COOKIE_KEY = "access_token";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8001';
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8001";
 
 // No cliente, usa o proxy do Next.js. No servidor (SSR), chama o backend diretamente.
-const isClient = typeof window !== 'undefined';
-const CLIENT_PROXY_URL = '/api/proxy';
+const isClient = typeof window !== "undefined";
+const CLIENT_PROXY_URL = "/api/proxy";
 
 const apiClient = axios.create({
   baseURL: isClient ? CLIENT_PROXY_URL : API_BASE_URL,
   headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
+    "Content-Type": "application/json",
+    Accept: "application/json",
   },
   withCredentials: true,
 });
 
 export function getToken(): string | undefined {
-  if (typeof window === 'undefined') return undefined;
+  if (typeof window === "undefined") return undefined;
   return Cookies.get(TOKEN_COOKIE_KEY);
 }
 
 export function setToken(token: string, expiresInSeconds?: number): void {
   const options: Cookies.CookieAttributes = {
-    path: '/',
-    sameSite: 'lax',
-    secure: process.env.NODE_ENV === 'production',
+    path: "/",
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
   };
   if (expiresInSeconds) {
     options.expires = expiresInSeconds / 86_400; // js-cookie espera dias
@@ -37,7 +38,7 @@ export function setToken(token: string, expiresInSeconds?: number): void {
 }
 
 export function removeToken(): void {
-  Cookies.remove(TOKEN_COOKIE_KEY, { path: '/' });
+  Cookies.remove(TOKEN_COOKIE_KEY, { path: "/" });
 }
 
 // Interceptor de request: anexa JWT Bearer + Accept-Language
@@ -47,13 +48,16 @@ apiClient.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    if (typeof window !== 'undefined') {
-      const locale = Cookies.get('NEXT_LOCALE') || localStorage.getItem('NEXT_LOCALE') || 'en';
-      config.headers['Accept-Language'] = locale;
+    if (typeof window !== "undefined") {
+      const locale =
+        Cookies.get("NEXT_LOCALE") ||
+        localStorage.getItem("NEXT_LOCALE") ||
+        "en";
+      config.headers["Accept-Language"] = locale;
     }
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 // Interceptor de response: auto-refresh do token em 401
@@ -82,7 +86,7 @@ apiClient.interceptors.response.use(
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&
-      !originalRequest.url?.includes('/auth/')
+      !originalRequest.url?.includes("/auth/")
     ) {
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
@@ -100,7 +104,11 @@ apiClient.interceptors.response.use(
         const currentToken = getToken();
         const refreshBaseUrl = isClient ? CLIENT_PROXY_URL : API_BASE_URL;
         const { data } = await axios.post<
-          ApiResponse<{ access_token: string; token_type: string; expires_in: number }>
+          ApiResponse<{
+            access_token: string;
+            token_type: string;
+            expires_in: number;
+          }>
         >(
           `${refreshBaseUrl}/api/auth/v1/refresh`,
           {},
@@ -108,7 +116,7 @@ apiClient.interceptors.response.use(
             headers: {
               Authorization: `Bearer ${currentToken}`,
             },
-          }
+          },
         );
 
         const newToken = data.data?.access_token;
@@ -121,8 +129,8 @@ apiClient.interceptors.response.use(
       } catch (refreshError) {
         processQueue(refreshError, null);
         removeToken();
-        if (typeof window !== 'undefined') {
-          window.location.href = '/login';
+        if (typeof window !== "undefined") {
+          window.location.href = "/login";
         }
         return Promise.reject(refreshError);
       } finally {
@@ -131,7 +139,7 @@ apiClient.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export { apiClient };

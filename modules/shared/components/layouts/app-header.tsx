@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { LanguageSwitcher } from '@/modules/shared/components/ui/language-switcher';
-import { ThemeToggle } from '@/modules/shared/components/ui/theme-toggle';
+import { LanguageSwitcher } from "@/modules/shared/components/ui/language-switcher";
+import { ThemeToggle } from "@/modules/shared/components/ui/theme-toggle";
 
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbList,
   BreadcrumbPage,
-} from '@/components/ui/breadcrumb';
-import { Separator } from '@/components/ui/separator';
-import { SidebarTrigger } from '@/components/ui/sidebar';
+} from "@/components/ui/breadcrumb";
+import { Separator } from "@/components/ui/separator";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 interface AppHeaderProps {
   title: string;
@@ -23,7 +23,9 @@ export function AppHeader({ title }: AppHeaderProps) {
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbPage className="text-sm font-medium">{title}</BreadcrumbPage>
+            <BreadcrumbPage className="text-sm font-medium">
+              {title}
+            </BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>

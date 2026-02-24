@@ -19,5 +19,5 @@ export interface PaginationParams {
   per_page?: number;
   search?: string;
   sort_by?: string;
-  sort_direction?: 'asc' | 'desc';
+  sort_direction?: "asc" | "desc";
 }

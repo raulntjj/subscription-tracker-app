@@ -1,5 +1,5 @@
-import type { User } from '@/modules/auth/types/auth-types';
-import { create } from 'zustand';
+import type { User } from "@/modules/auth/types/auth-types";
+import { create } from "zustand";
 
 interface AuthState {
   user: User | null;
@@ -15,6 +15,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: false,
   isLoading: true,
   setUser: (user) => set({ user, isAuthenticated: true, isLoading: false }),
-  clearUser: () => set({ user: null, isAuthenticated: false, isLoading: false }),
+  clearUser: () =>
+    set({ user: null, isAuthenticated: false, isLoading: false }),
   setLoading: (loading) => set({ isLoading: loading }),
 }));

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { RegisterForm } from '@/modules/auth/components/forms/register-form';
-import { useTranslation } from '@/modules/shared/hooks/use-translation';
-import { Coins } from 'lucide-react';
+import { RegisterForm } from "@/modules/auth/components/forms/register-form";
+import { useTranslation } from "@/modules/shared/hooks/use-translation";
+import { Coins } from "lucide-react";
 
 export function RegisterContainer() {
   const { t } = useTranslation();
@@ -15,15 +15,19 @@ export function RegisterContainer() {
           <div className="flex size-8 items-center justify-center rounded-lg bg-primary-foreground/15">
             <Coins className="size-4 text-white" />
           </div>
-          <span className="text-lg font-semibold text-foreground">{t('appName')}</span>
+          <span className="text-lg font-semibold text-foreground">
+            {t("appName")}
+          </span>
         </div>
         <div className="max-w-md">
-          <h2 className="text-3xl font-bold leading-tight text-balance">{t('registerHeadline')}</h2>
+          <h2 className="text-3xl font-bold leading-tight text-balance">
+            {t("registerHeadline")}
+          </h2>
           <p className="mt-4 text-sm leading-relaxed text-primary-foreground/75">
-            {t('registerSubtext')}
+            {t("registerSubtext")}
           </p>
         </div>
-        <p className="text-xs text-primary-foreground/50">{t('brandFooter')}</p>
+        <p className="text-xs text-primary-foreground/50">{t("brandFooter")}</p>
       </div>
 
       {/* Painel do formulário */}
@@ -34,12 +38,12 @@ export function RegisterContainer() {
               <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                 <Coins className="size-4 text-white" />
               </div>
-              <span className="text-lg font-semibold">{t('appName')}</span>
+              <span className="text-lg font-semibold">{t("appName")}</span>
             </div>
             <h1 className="text-2xl font-bold tracking-tight text-balance">
-              {t('createYourAccount')}
+              {t("createYourAccount")}
             </h1>
-            <p className="text-sm text-muted-foreground">{t('getStarted')}</p>
+            <p className="text-sm text-muted-foreground">{t("getStarted")}</p>
           </div>
           <RegisterForm />
         </div>

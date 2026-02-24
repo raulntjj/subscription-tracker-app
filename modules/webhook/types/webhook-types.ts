@@ -1,4 +1,3 @@
-
 export interface WebhookConfig {
   id: number;
   user_id: number;

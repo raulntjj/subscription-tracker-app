@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
-import { type Locale, useI18nStore } from '@/modules/shared/store/i18n-store';
+import { type Locale, useI18nStore } from "@/modules/shared/store/i18n-store";
 
 interface I18nProviderProps {
   initialLocale: Locale;

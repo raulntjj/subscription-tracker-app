@@ -1,7 +1,7 @@
-import { apiClient, removeToken } from '@/modules/shared/lib/api-client';
-import type { ApiResponse } from '@/modules/shared/types/api-types';
+import { apiClient, removeToken } from "@/modules/shared/lib/api-client";
+import type { ApiResponse } from "@/modules/shared/types/api-types";
 
-const BASE_URL = '/api/auth/v1';
+const BASE_URL = "/api/auth/v1";
 
 export async function logoutAction(): Promise<ApiResponse> {
   try {

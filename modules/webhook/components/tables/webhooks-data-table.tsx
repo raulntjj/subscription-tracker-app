@@ -1,13 +1,16 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-import { useTranslation } from '@/modules/shared/hooks/use-translation';
-import { WebhookDialog } from '@/modules/webhook/components/dialogs/webhook-dialog';
-import { useDeleteWebhook, useTestWebhook } from '@/modules/webhook/hooks/use-commands';
-import { useWebhooks } from '@/modules/webhook/hooks/use-queries';
-import type { WebhookConfig } from '@/modules/webhook/types/webhook-types';
-import { CheckCircle2, Loader2, MoreHorizontal, XCircle } from 'lucide-react';
+import { useTranslation } from "@/modules/shared/hooks/use-translation";
+import { WebhookDialog } from "@/modules/webhook/components/dialogs/webhook-dialog";
+import {
+  useDeleteWebhook,
+  useTestWebhook,
+} from "@/modules/webhook/hooks/use-commands";
+import { useWebhooks } from "@/modules/webhook/hooks/use-queries";
+import type { WebhookConfig } from "@/modules/webhook/types/webhook-types";
+import { CheckCircle2, Loader2, MoreHorizontal, XCircle } from "lucide-react";
 
 import {
   AlertDialog,
@@ -18,17 +21,17 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+} from "@/components/ui/alert-dialog";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Skeleton } from '@/components/ui/skeleton';
+} from "@/components/ui/dropdown-menu";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -36,7 +39,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
+} from "@/components/ui/table";
 
 export function WebhooksDataTable() {
   const { t } = useTranslation();
@@ -66,9 +69,9 @@ export function WebhooksDataTable() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>{t('thUrl')}</TableHead>
-              <TableHead>{t('thStatus')}</TableHead>
-              <TableHead>{t('thCreated')}</TableHead>
+              <TableHead>{t("thUrl")}</TableHead>
+              <TableHead>{t("thStatus")}</TableHead>
+              <TableHead>{t("thCreated")}</TableHead>
               <TableHead className="w-12" />
             </TableRow>
           </TableHeader>
@@ -98,7 +101,9 @@ export function WebhooksDataTable() {
   if (isError) {
     return (
       <div className="flex h-48 items-center justify-center rounded-lg border border-dashed">
-        <p className="text-sm text-muted-foreground">{t('failedToLoadWebhooks')}</p>
+        <p className="text-sm text-muted-foreground">
+          {t("failedToLoadWebhooks")}
+        </p>
       </div>
     );
   }
@@ -111,11 +116,11 @@ export function WebhooksDataTable() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>{t('thUrl')}</TableHead>
-              <TableHead>{t('thStatus')}</TableHead>
-              <TableHead>{t('thCreated')}</TableHead>
+              <TableHead>{t("thUrl")}</TableHead>
+              <TableHead>{t("thStatus")}</TableHead>
+              <TableHead>{t("thCreated")}</TableHead>
               <TableHead className="w-12">
-                <span className="sr-only">{t('openMenu')}</span>
+                <span className="sr-only">{t("openMenu")}</span>
               </TableHead>
             </TableRow>
           </TableHeader>
@@ -123,7 +128,9 @@ export function WebhooksDataTable() {
             {webhookList.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={4} className="h-48 text-center">
-                  <p className="text-sm text-muted-foreground">{t('noWebhooks')}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {t("noWebhooks")}
+                  </p>
                 </TableCell>
               </TableRow>
             ) : (
@@ -131,40 +138,47 @@ export function WebhooksDataTable() {
                 <TableRow key={webhook.id}>
                   <TableCell>
                     <div className="flex flex-col">
-                      <span className="font-medium truncate max-w-md">{webhook.url}</span>
+                      <span className="font-medium truncate max-w-md">
+                        {webhook.url}
+                      </span>
                     </div>
                   </TableCell>
                   <TableCell>
                     {webhook.is_active ? (
                       <Badge variant="default" className="gap-1">
                         <CheckCircle2 className="size-3" />
-                        {t('active')}
+                        {t("active")}
                       </Badge>
                     ) : (
                       <Badge variant="secondary" className="gap-1">
                         <XCircle className="size-3" />
-                        {t('inactive')}
+                        {t("inactive")}
                       </Badge>
                     )}
                   </TableCell>
                   <TableCell className="text-sm text-muted-foreground">
-                    {webhook.created_at ? new Date(webhook.created_at).toLocaleDateString('en-US', {
-                      month: 'short',
-                      day: '2-digit',
-                      year: 'numeric'
-                    }) : ''}
+                    {webhook.created_at
+                      ? new Date(webhook.created_at).toLocaleDateString(
+                          "en-US",
+                          {
+                            month: "short",
+                            day: "2-digit",
+                            year: "numeric",
+                          },
+                        )
+                      : ""}
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button variant="ghost" size="icon" className="size-8">
                           <MoreHorizontal className="size-4" />
-                          <span className="sr-only">{t('openMenu')}</span>
+                          <span className="sr-only">{t("openMenu")}</span>
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuItem onClick={() => handleEdit(webhook)}>
-                          {t('edit')}
+                          {t("edit")}
                         </DropdownMenuItem>
                         <DropdownMenuItem
                           onClick={() => testMutation.mutate(webhook.id)}
@@ -173,10 +187,10 @@ export function WebhooksDataTable() {
                           {testMutation.isPending ? (
                             <>
                               <Loader2 className="size-3 animate-spin mr-1" />
-                              {t('testing')}
+                              {t("testing")}
                             </>
                           ) : (
-                            t('test')
+                            t("test")
                           )}
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
@@ -184,7 +198,7 @@ export function WebhooksDataTable() {
                           className="text-destructive"
                           onClick={() => setDeleteTarget(webhook)}
                         >
-                          {t('delete')}
+                          {t("delete")}
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -203,16 +217,18 @@ export function WebhooksDataTable() {
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>{t('deleteWebhook')}</AlertDialogTitle>
-            <AlertDialogDescription>{t('deleteWebhookConfirm')}</AlertDialogDescription>
+            <AlertDialogTitle>{t("deleteWebhook")}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {t("deleteWebhookConfirm")}
+            </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
+            <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDelete}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
-              {deleteMutation.isPending ? t('deleting') : t('delete')}
+              {deleteMutation.isPending ? t("deleting") : t("delete")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

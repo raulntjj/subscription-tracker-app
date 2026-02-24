@@ -1,10 +1,10 @@
-import { getWebhooks } from '@/modules/webhook/actions/get-webhooks-action';
-import { useQuery } from '@tanstack/react-query';
+import { getWebhooks } from "@/modules/webhook/actions/get-webhooks-action";
+import { useQuery } from "@tanstack/react-query";
 
 export const webhookKeys = {
-  all: ['webhooks'] as const,
-  lists: () => [...webhookKeys.all, 'list'] as const,
-  detail: (id: number) => [...webhookKeys.all, 'detail', id] as const,
+  all: ["webhooks"] as const,
+  lists: () => [...webhookKeys.all, "list"] as const,
+  detail: (id: number) => [...webhookKeys.all, "detail", id] as const,
 };
 
 export function useWebhooks() {

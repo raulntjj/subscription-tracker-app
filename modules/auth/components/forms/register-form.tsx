@@ -1,16 +1,19 @@
-'use client';
+"use client";
 
-import { useRegister } from '@/modules/auth/hooks/use-commands';
-import { type RegisterFormData, registerSchema } from '@/modules/auth/lib/validations/register';
-import { useTranslation } from '@/modules/shared/hooks/use-translation';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Loader2 } from 'lucide-react';
-import Link from 'next/link';
-import { useForm } from 'react-hook-form';
+import { useRegister } from "@/modules/auth/hooks/use-commands";
+import {
+  type RegisterFormData,
+  registerSchema,
+} from "@/modules/auth/lib/validations/register";
+import { useTranslation } from "@/modules/shared/hooks/use-translation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export function RegisterForm() {
   const { t } = useTranslation();
@@ -23,11 +26,11 @@ export function RegisterForm() {
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      name: '',
-      surname: '',
-      email: '',
-      password: '',
-      password_confirmation: '',
+      name: "",
+      surname: "",
+      email: "",
+      password: "",
+      password_confirmation: "",
     },
   });
 
@@ -37,67 +40,77 @@ export function RegisterForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
       <div className="grid grid-cols-2 gap-4">
         <div className="flex flex-col gap-2">
-          <Label htmlFor="name">{t('firstName')}</Label>
+          <Label htmlFor="name">{t("firstName")}</Label>
           <Input
             id="name"
-            placeholder={t('firstNamePlaceholder')}
+            placeholder={t("firstNamePlaceholder")}
             autoComplete="given-name"
             aria-invalid={!!errors.name}
-            {...register('name')}
+            {...register("name")}
           />
-          {errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}
+          {errors.name && (
+            <p className="text-xs text-destructive">{errors.name.message}</p>
+          )}
         </div>
         <div className="flex flex-col gap-2">
-          <Label htmlFor="surname">{t('lastName')}</Label>
+          <Label htmlFor="surname">{t("lastName")}</Label>
           <Input
             id="surname"
-            placeholder={t('lastNamePlaceholder')}
+            placeholder={t("lastNamePlaceholder")}
             autoComplete="family-name"
             aria-invalid={!!errors.surname}
-            {...register('surname')}
+            {...register("surname")}
           />
-          {errors.surname && <p className="text-xs text-destructive">{errors.surname.message}</p>}
+          {errors.surname && (
+            <p className="text-xs text-destructive">{errors.surname.message}</p>
+          )}
         </div>
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label htmlFor="reg-email">{t('email')}</Label>
+        <Label htmlFor="reg-email">{t("email")}</Label>
         <Input
           id="reg-email"
           type="email"
-          placeholder={t('emailPlaceholder')}
+          placeholder={t("emailPlaceholder")}
           autoComplete="email"
           aria-invalid={!!errors.email}
-          {...register('email')}
+          {...register("email")}
         />
-        {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
+        {errors.email && (
+          <p className="text-xs text-destructive">{errors.email.message}</p>
+        )}
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label htmlFor="reg-password">{t('password')}</Label>
+        <Label htmlFor="reg-password">{t("password")}</Label>
         <Input
           id="reg-password"
           type="password"
-          placeholder={t('passwordPlaceholder')}
+          placeholder={t("passwordPlaceholder")}
           autoComplete="new-password"
           aria-invalid={!!errors.password}
-          {...register('password')}
+          {...register("password")}
         />
-        {errors.password && <p className="text-xs text-destructive">{errors.password.message}</p>}
+        {errors.password && (
+          <p className="text-xs text-destructive">{errors.password.message}</p>
+        )}
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label htmlFor="password_confirmation">{t('confirmPassword')}</Label>
+        <Label htmlFor="password_confirmation">{t("confirmPassword")}</Label>
         <Input
           id="password_confirmation"
           type="password"
-          placeholder={t('confirmPasswordPlaceholder')}
+          placeholder={t("confirmPasswordPlaceholder")}
           autoComplete="new-password"
           aria-invalid={!!errors.password_confirmation}
-          {...register('password_confirmation')}
+          {...register("password_confirmation")}
         />
         {errors.password_confirmation && (
-          <p className="text-xs text-destructive">{errors.password_confirmation.message}</p>
+          <p className="text-xs text-destructive">
+            {errors.password_confirmation.message}
+          </p>
         )}
       </div>
 
@@ -105,17 +118,20 @@ export function RegisterForm() {
         {isPending ? (
           <>
             <Loader2 className="size-4 animate-spin" />
-            {t('creatingAccount')}
+            {t("creatingAccount")}
           </>
         ) : (
-          t('createAccount')
+          t("createAccount")
         )}
       </Button>
 
       <p className="text-center text-sm text-muted-foreground">
-        {t('alreadyHaveAccount')}{' '}
-        <Link href="/login" className="font-medium text-primary underline-offset-4 hover:underline">
-          {t('signInLink')}
+        {t("alreadyHaveAccount")}{" "}
+        <Link
+          href="/login"
+          className="font-medium text-primary underline-offset-4 hover:underline"
+        >
+          {t("signInLink")}
         </Link>
       </p>
     </form>

@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 
-import { useTranslation } from '@/modules/shared/hooks/use-translation';
-import { WebhookForm } from '@/modules/webhook/components/forms/webhook-form';
-import type { WebhookConfig } from '@/modules/webhook/types/webhook-types';
+import { useTranslation } from "@/modules/shared/hooks/use-translation";
+import { WebhookForm } from "@/modules/webhook/components/forms/webhook-form";
+import type { WebhookConfig } from "@/modules/webhook/types/webhook-types";
 
 import {
   Dialog,
@@ -14,7 +14,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
+} from "@/components/ui/dialog";
 
 type Props = {
   open: boolean;
@@ -23,9 +23,14 @@ type Props = {
   trigger?: React.ReactNode;
 };
 
-export function WebhookDialog({ open, onOpenChange, initialData, trigger }: Props) {
+export function WebhookDialog({
+  open,
+  onOpenChange,
+  initialData,
+  trigger,
+}: Props) {
   const { t } = useTranslation();
-  const title = initialData ? t('editWebhook') : t('createWebhook');
+  const title = initialData ? t("editWebhook") : t("createWebhook");
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -34,11 +39,14 @@ export function WebhookDialog({ open, onOpenChange, initialData, trigger }: Prop
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>
-            {initialData ? t('editWebhookDesc') : t('createWebhookDesc')}
+            {initialData ? t("editWebhookDesc") : t("createWebhookDesc")}
           </DialogDescription>
         </DialogHeader>
 
-        <WebhookForm initialData={initialData} onClose={() => onOpenChange(false)} />
+        <WebhookForm
+          initialData={initialData}
+          onClose={() => onOpenChange(false)}
+        />
 
         <DialogFooter />
       </DialogContent>

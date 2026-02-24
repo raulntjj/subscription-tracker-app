@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useTranslation } from '@/modules/shared/hooks/use-translation';
-import { useBudget } from '@/modules/subscription/hooks/use-queries';
-import { CalendarDays, CreditCard, DollarSign, TrendingUp } from 'lucide-react';
+import { useTranslation } from "@/modules/shared/hooks/use-translation";
+import { useBudget } from "@/modules/subscription/hooks/use-queries";
+import { CalendarDays, CreditCard, DollarSign, TrendingUp } from "lucide-react";
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function BudgetCards() {
   const { t } = useTranslation();
@@ -36,13 +36,15 @@ export function BudgetCards() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              {t('monthlyBudget')}
+              {t("monthlyBudget")}
             </CardTitle>
             <DollarSign className="size-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold tabular-nums">--</div>
-            <p className="text-xs text-muted-foreground">{t('noDataAvailable')}</p>
+            <p className="text-xs text-muted-foreground">
+              {t("noDataAvailable")}
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -56,49 +58,63 @@ export function BudgetCards() {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <CardTitle className="text-sm font-medium text-muted-foreground">
-            {t('totalCommitted')}
+            {t("totalCommitted")}
           </CardTitle>
           <DollarSign className="size-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold tabular-nums">{budget.total_committed_formatted}</div>
-          <p className="text-xs text-muted-foreground">{t('fixedMonthlyExpenses')}</p>
+          <div className="text-2xl font-bold tabular-nums">
+            {budget.total_committed_formatted}
+          </div>
+          <p className="text-xs text-muted-foreground">
+            {t("fixedMonthlyExpenses")}
+          </p>
         </CardContent>
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <CardTitle className="text-sm font-medium text-muted-foreground">
-            {t('upcomingBills')}
+            {t("upcomingBills")}
           </CardTitle>
           <TrendingUp className="size-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold tabular-nums">{budget.upcoming_bills_formatted}</div>
-          <p className="text-xs text-muted-foreground">{t('duePeriod')}</p>
+          <div className="text-2xl font-bold tabular-nums">
+            {budget.upcoming_bills_formatted}
+          </div>
+          <p className="text-xs text-muted-foreground">{t("duePeriod")}</p>
         </CardContent>
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <CardTitle className="text-sm font-medium text-muted-foreground">
-            {t('totalMonthly')}
+            {t("totalMonthly")}
           </CardTitle>
           <CreditCard className="size-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold tabular-nums">{budget.total_monthly_formatted}</div>
-          <p className="text-xs text-muted-foreground">{t('allSubscriptions')}</p>
+          <div className="text-2xl font-bold tabular-nums">
+            {budget.total_monthly_formatted}
+          </div>
+          <p className="text-xs text-muted-foreground">
+            {t("allSubscriptions")}
+          </p>
         </CardContent>
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <CardTitle className="text-sm font-medium text-muted-foreground">
-            {t('categories')}
+            {t("categories")}
           </CardTitle>
           <CalendarDays className="size-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold tabular-nums">{breakdownCount}</div>
-          <p className="text-xs text-muted-foreground">{t('activeCategories')}</p>
+          <div className="text-2xl font-bold tabular-nums">
+            {breakdownCount}
+          </div>
+          <p className="text-xs text-muted-foreground">
+            {t("activeCategories")}
+          </p>
         </CardContent>
       </Card>
     </div>

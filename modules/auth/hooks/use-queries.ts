@@ -1,12 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-import { getMeAction } from '@/modules/auth/actions/get-me-action';
-import { useAuthStore } from '@/modules/auth/store/auth-store';
-import { useQuery } from '@tanstack/react-query';
+import { getMeAction } from "@/modules/auth/actions/get-me-action";
+import { useAuthStore } from "@/modules/auth/store/auth-store";
+import { useQuery } from "@tanstack/react-query";
 
 export const authKeys = {
-  all: ['auth'] as const,
-  me: () => [...authKeys.all, 'me'] as const,
+  all: ["auth"] as const,
+  me: () => [...authKeys.all, "me"] as const,
 };
 
 export function useMe() {
