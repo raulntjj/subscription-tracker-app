@@ -15,7 +15,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export function RegisterForm() {
   const { t } = useTranslation();
@@ -42,12 +48,13 @@ export function RegisterForm() {
     <Card>
       <CardHeader className="text-center">
         <CardTitle className="text-xl">{t("createYourAccount")}</CardTitle>
-        <CardDescription>
-          {t("getStarted")}
-        </CardDescription>
+        <CardDescription>{t("getStarted")}</CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit(onSubmit)} className={cn("flex flex-col gap-6")}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className={cn("flex flex-col gap-6")}
+        >
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-2">
               <Label htmlFor="name">{t("firstName")}</Label>
@@ -59,7 +66,9 @@ export function RegisterForm() {
                 {...register("name")}
               />
               {errors.name && (
-                <p className="text-xs text-destructive">{errors.name.message}</p>
+                <p className="text-xs text-destructive">
+                  {errors.name.message}
+                </p>
               )}
             </div>
             <div className="flex flex-col gap-2">
@@ -72,7 +81,9 @@ export function RegisterForm() {
                 {...register("surname")}
               />
               {errors.surname && (
-                <p className="text-xs text-destructive">{errors.surname.message}</p>
+                <p className="text-xs text-destructive">
+                  {errors.surname.message}
+                </p>
               )}
             </div>
           </div>
@@ -103,12 +114,16 @@ export function RegisterForm() {
               {...register("password")}
             />
             {errors.password && (
-              <p className="text-xs text-destructive">{errors.password.message}</p>
+              <p className="text-xs text-destructive">
+                {errors.password.message}
+              </p>
             )}
           </div>
 
           <div className="flex flex-col gap-2">
-            <Label htmlFor="password_confirmation">{t("confirmPassword")}</Label>
+            <Label htmlFor="password_confirmation">
+              {t("confirmPassword")}
+            </Label>
             <Input
               id="password_confirmation"
               type="password"

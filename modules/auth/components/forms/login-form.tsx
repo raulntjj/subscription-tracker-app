@@ -14,7 +14,13 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 export function LoginForm() {
@@ -36,12 +42,13 @@ export function LoginForm() {
     <Card>
       <CardHeader className="text-center">
         <CardTitle className="text-xl">{t("welcomeBack")}</CardTitle>
-        <CardDescription>
-          {t("signInToContinue")}
-        </CardDescription>
+        <CardDescription>{t("signInToContinue")}</CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit(onSubmit)} className={cn("flex flex-col gap-6")}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className={cn("flex flex-col gap-6")}
+        >
           <div className="flex flex-col gap-2">
             <Label htmlFor="email">{t("email")}</Label>
             <Input
@@ -68,7 +75,9 @@ export function LoginForm() {
               {...register("password")}
             />
             {errors.password && (
-              <p className="text-xs text-destructive">{errors.password.message}</p>
+              <p className="text-xs text-destructive">
+                {errors.password.message}
+              </p>
             )}
           </div>
 

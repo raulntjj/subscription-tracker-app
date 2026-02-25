@@ -16,7 +16,7 @@ export function LoginContainer() {
           </div>
           {t("appName")}
         </a>
-          <LoginForm />
+        <LoginForm />
       </div>
     </div>
   );
