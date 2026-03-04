@@ -3,12 +3,12 @@ set -e
 
 echo "Starting Next.js development server..."
 
-# Verifica se node_modules existe e se next está instalado
-if [ ! -d "node_modules" ] || [ ! -f "node_modules/.bin/next" ]; then
-    echo "Installing dependencies..."
-    npm install
+# Verifica instalação de dependencias
+if [ -f /app/node_modules/.bin/next ]; then
+    echo "Next.js found in node_modules, skipping npm install"
 else
-    echo "Dependencies already installed"
+    echo "Next.js not found, running npm install..."
+    npm install --no-audit --prefer-offline
 fi
 
 exec npm run dev
