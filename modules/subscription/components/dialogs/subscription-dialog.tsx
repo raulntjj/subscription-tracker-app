@@ -1,10 +1,6 @@
-"use client";
+'use client';
 
-import React from "react";
-
-import { useTranslation } from "@/modules/shared/hooks/use-translation";
-import { SubscriptionForm } from "@/modules/subscription/components/forms/subscription-form";
-import type { Subscription } from "@/modules/subscription/types/subscription-types";
+import React from 'react';
 
 import {
   Dialog,
@@ -13,7 +9,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
+
+import { useTranslation } from '@/modules/shared/hooks/use-translation';
+import type { Subscription } from '@/modules/subscription/types/subscription-types';
+import { SubscriptionForm } from '@/modules/subscription/components/forms/subscription-form';
 
 type Props = {
   open: boolean;
@@ -29,7 +29,7 @@ export function SubscriptionDialog({
   trigger,
 }: Props) {
   const { t } = useTranslation();
-  const title = initialData ? t("editSubscription") : t("createSubscription");
+  const title = initialData ? t('editSubscription') : t('createSubscription');
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -39,8 +39,8 @@ export function SubscriptionDialog({
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>
             {initialData
-              ? t("editSubscriptionDesc")
-              : t("createSubscriptionDesc")}
+              ? t('editSubscriptionDesc')
+              : t('createSubscriptionDesc')}
           </DialogDescription>
         </DialogHeader>
 

@@ -1,5 +1,6 @@
-import type { User } from "@/modules/auth/types/auth-types";
-import { create } from "zustand";
+import { create } from 'zustand';
+
+import type { User } from '@/modules/auth/types/auth-types';
 
 interface AuthState {
   user: User | null;

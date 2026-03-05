@@ -1,19 +1,19 @@
-import { apiClient } from "@/modules/shared/lib/api-client";
-import type { ApiResponse } from "@/modules/shared/types/api-types";
+import { apiClient } from '@/modules/shared/lib/api-client';
+import type { ApiResponse } from '@/modules/shared/types/api-types';
 import type {
   WebhookConfig,
   WebhookFormData,
-} from "@/modules/webhook/types/webhook-types";
+} from '@/modules/webhook/types/webhook-types';
 
-const BASE_URL = "/api/web/v1/webhooks";
+const BASE_URL = '/api/web/v1/webhooks';
 
 export async function updateWebhook(
   id: number,
-  payload: WebhookFormData,
+  payload: WebhookFormData
 ): Promise<ApiResponse<WebhookConfig>> {
   const { data } = await apiClient.put<ApiResponse<WebhookConfig>>(
     `${BASE_URL}/${id}`,
-    payload,
+    payload
   );
   return data;
 }

@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
-import { LoginForm } from "@/modules/auth/components/forms/login-form";
-import { useTranslation } from "@/modules/shared/hooks/use-translation";
-import { Coins, GalleryVerticalEnd } from "lucide-react";
+import { Coins } from 'lucide-react';
+
+import { LoginForm } from '@/modules/auth/components/forms/login-form';
+import { useTranslation } from '@/modules/shared/hooks/use-translation';
 
 export function LoginContainer() {
   const { t } = useTranslation();
@@ -14,7 +15,7 @@ export function LoginContainer() {
           <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
             <Coins className="size-4" />
           </div>
-          {t("appName")}
+          {t('appName')}
         </a>
         <LoginForm />
       </div>

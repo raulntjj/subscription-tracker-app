@@ -1,12 +1,12 @@
-import { apiClient } from "@/modules/shared/lib/api-client";
+import { apiClient } from '@/modules/shared/lib/api-client';
+import type { Subscription } from '@/modules/subscription/types/subscription-types';
 import type {
   ApiResponse,
   PaginatedData,
   PaginationParams,
-} from "@/modules/shared/types/api-types";
-import type { Subscription } from "@/modules/subscription/types/subscription-types";
+} from '@/modules/shared/types/api-types';
 
-const BASE_URL = "/api/web/v1/subscriptions";
+const BASE_URL = '/api/web/v1/subscriptions';
 
 // A API retorna: { success, message, data: { subscriptions: [...], total, per_page, current_page, last_page } }
 type SubscriptionsPaginatedData = PaginatedData<{
@@ -14,13 +14,13 @@ type SubscriptionsPaginatedData = PaginatedData<{
 }>;
 
 export async function getSubscriptions(
-  params?: PaginationParams,
+  params?: PaginationParams
 ): Promise<ApiResponse<SubscriptionsPaginatedData>> {
   const { data } = await apiClient.get<ApiResponse<SubscriptionsPaginatedData>>(
     BASE_URL,
     {
       params,
-    },
+    }
   );
   return data;
 }

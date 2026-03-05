@@ -1,27 +1,28 @@
-"use client";
+'use client';
 
-import { useLogin } from "@/modules/auth/hooks/use-commands";
-import {
-  type LoginFormData,
-  loginSchema,
-} from "@/modules/auth/lib/validations/login";
-import { useTranslation } from "@/modules/shared/hooks/use-translation";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
+import Link from 'next/link';
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { cn } from '@/lib/utils';
+import { Loader2 } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/card';
+
+import { useLogin } from '@/modules/auth/hooks/use-commands';
+import { useTranslation } from '@/modules/shared/hooks/use-translation';
+import {
+  type LoginFormData,
+  loginSchema,
+} from '@/modules/auth/lib/validations/login';
 
 export function LoginForm() {
   const { t } = useTranslation();
@@ -33,7 +34,7 @@ export function LoginForm() {
     formState: { errors },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
-    defaultValues: { email: "", password: "" },
+    defaultValues: { email: '', password: '' },
   });
 
   const onSubmit = (data: LoginFormData) => login(data);
@@ -41,23 +42,23 @@ export function LoginForm() {
   return (
     <Card>
       <CardHeader className="text-center">
-        <CardTitle className="text-xl">{t("welcomeBack")}</CardTitle>
-        <CardDescription>{t("signInToContinue")}</CardDescription>
+        <CardTitle className="text-xl">{t('welcomeBack')}</CardTitle>
+        <CardDescription>{t('signInToContinue')}</CardDescription>
       </CardHeader>
       <CardContent>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className={cn("flex flex-col gap-6")}
+          className={cn('flex flex-col gap-6')}
         >
           <div className="flex flex-col gap-2">
-            <Label htmlFor="email">{t("email")}</Label>
+            <Label htmlFor="email">{t('email')}</Label>
             <Input
               id="email"
               type="email"
-              placeholder={t("emailPlaceholder")}
+              placeholder={t('emailPlaceholder')}
               autoComplete="email"
               aria-invalid={!!errors.email}
-              {...register("email")}
+              {...register('email')}
             />
             {errors.email && (
               <p className="text-xs text-destructive">{errors.email.message}</p>
@@ -65,14 +66,14 @@ export function LoginForm() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <Label htmlFor="password">{t("password")}</Label>
+            <Label htmlFor="password">{t('password')}</Label>
             <Input
               id="password"
               type="password"
-              placeholder={t("passwordPlaceholder")}
+              placeholder={t('passwordPlaceholder')}
               autoComplete="current-password"
               aria-invalid={!!errors.password}
-              {...register("password")}
+              {...register('password')}
             />
             {errors.password && (
               <p className="text-xs text-destructive">
@@ -85,20 +86,20 @@ export function LoginForm() {
             {isPending ? (
               <>
                 <Loader2 className="size-4 animate-spin" />
-                {t("signingIn")}
+                {t('signingIn')}
               </>
             ) : (
-              t("signIn")
+              t('signIn')
             )}
           </Button>
 
           <p className="text-center text-sm text-muted-foreground">
-            {t("noAccount")}{" "}
+            {t('noAccount')}{' '}
             <Link
               href="/register"
               className="font-medium text-primary underline-offset-4 hover:underline"
             >
-              {t("createOne")}
+              {t('createOne')}
             </Link>
           </p>
         </form>

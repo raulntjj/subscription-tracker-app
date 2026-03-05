@@ -1,24 +1,27 @@
-import { getApiErrorMessage } from "@/modules/shared/lib/api-error";
-import { createSubscription } from "@/modules/subscription/actions/create-subscription";
-import { deleteSubscription } from "@/modules/subscription/actions/delete-subscription";
-import { updateSubscription } from "@/modules/subscription/actions/update-subscription";
-import type { SubscriptionFormData } from "@/modules/subscription/lib/validations/subscription";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
+import { toast } from 'sonner';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { subscriptionKeys } from "./use-queries";
+import { ApiResponse } from '@/modules/shared/types/api-types';
+import { getApiErrorMessage } from '@/modules/shared/lib/api-error';
+import { createSubscription } from '@/modules/subscription/actions/create-subscription';
+import { deleteSubscription } from '@/modules/subscription/actions/delete-subscription';
+import { updateSubscription } from '@/modules/subscription/actions/update-subscription';
+import type { SubscriptionFormData } from '@/modules/subscription/lib/validations/subscription';
+
+import { subscriptionKeys } from './use-queries';
+import { Subscription } from '../types/subscription-types';
 
 export function useCreateSubscription() {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (payload: SubscriptionFormData) => createSubscription(payload),
-    onSuccess: (response) => {
+    onSuccess: (response: ApiResponse<Subscription>) => {
       queryClient.invalidateQueries({ queryKey: subscriptionKeys.lists() });
       queryClient.invalidateQueries({ queryKey: subscriptionKeys.budget() });
       toast.success(response.message);
     },
-    onError: (error) => {
+    onError: (error: ApiResponse<unknown>) => {
       toast.error(getApiErrorMessage(error));
     },
   });
@@ -35,12 +38,12 @@ export function useUpdateSubscription() {
       id: number;
       payload: SubscriptionFormData;
     }) => updateSubscription(id, payload),
-    onSuccess: (response) => {
+    onSuccess: (response: ApiResponse<Subscription>) => {
       queryClient.invalidateQueries({ queryKey: subscriptionKeys.lists() });
       queryClient.invalidateQueries({ queryKey: subscriptionKeys.budget() });
       toast.success(response.message);
     },
-    onError: (error) => {
+    onError: (error: ApiResponse<unknown>) => {
       toast.error(getApiErrorMessage(error));
     },
   });
@@ -55,7 +58,7 @@ export function useDeleteSubscription() {
       queryClient.invalidateQueries({ queryKey: subscriptionKeys.lists() });
       queryClient.invalidateQueries({ queryKey: subscriptionKeys.budget() });
     },
-    onError: (error) => {
+    onError: (error: ApiResponse<unknown>) => {
       toast.error(getApiErrorMessage(error));
     },
   });

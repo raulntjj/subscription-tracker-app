@@ -1,16 +1,27 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import { useTranslation } from "@/modules/shared/hooks/use-translation";
-import type { PaginationParams } from "@/modules/shared/types/api-types";
-import { SubscriptionDialog } from "@/modules/subscription/components/dialogs/subscription-dialog";
-import { useDeleteSubscription } from "@/modules/subscription/hooks/use-commands";
-import { useSubscriptions } from "@/modules/subscription/hooks/use-queries";
-import type { Subscription } from "@/modules/subscription/types/subscription-types";
-import { format } from "date-fns";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
-
+import { format } from 'date-fns';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
+import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -20,54 +31,43 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Skeleton } from "@/components/ui/skeleton";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+} from '@/components/ui/alert-dialog';
+
+import { useTranslation } from '@/modules/shared/hooks/use-translation';
+import type { PaginationParams } from '@/modules/shared/types/api-types';
+import { useSubscriptions } from '@/modules/subscription/hooks/use-queries';
+import { useDeleteSubscription } from '@/modules/subscription/hooks/use-commands';
+import type { Subscription } from '@/modules/subscription/types/subscription-types';
+import { SubscriptionDialog } from '@/modules/subscription/components/dialogs/subscription-dialog';
 
 const statusVariants: Record<
   string,
-  "default" | "secondary" | "destructive" | "outline"
+  'default' | 'secondary' | 'destructive' | 'outline'
 > = {
-  active: "default",
-  paused: "secondary",
-  cancelled: "destructive",
+  active: 'default',
+  paused: 'secondary',
+  cancelled: 'destructive',
 };
 
 export function SubscriptionsDataTable() {
   const { t } = useTranslation();
 
   const statusLabels: Record<string, string> = {
-    active: t("active"),
-    paused: t("paused"),
-    cancelled: t("cancelled"),
+    active: t('active'),
+    paused: t('paused'),
+    cancelled: t('cancelled'),
   };
 
   const cycleLabels: Record<string, string> = {
-    monthly: t("monthly"),
-    yearly: t("yearly"),
+    monthly: t('monthly'),
+    yearly: t('yearly'),
   };
 
   const [params, setParams] = useState<PaginationParams>({
     page: 1,
     per_page: 10,
-    sort_by: "name",
-    sort_direction: "asc",
+    sort_by: 'name',
+    sort_direction: 'asc',
   });
 
   const { data, isLoading, isError } = useSubscriptions(params);
@@ -82,9 +82,9 @@ export function SubscriptionsDataTable() {
       ...prev,
       sort_by: column,
       sort_direction:
-        prev.sort_by === column && prev.sort_direction === "asc"
-          ? "desc"
-          : "asc",
+        prev.sort_by === column && prev.sort_direction === 'asc'
+          ? 'desc'
+          : 'asc',
     }));
   };
 
@@ -106,11 +106,11 @@ export function SubscriptionsDataTable() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>{t("thName")}</TableHead>
-              <TableHead>{t("thPrice")}</TableHead>
-              <TableHead>{t("thCycle")}</TableHead>
-              <TableHead>{t("thStatus")}</TableHead>
-              <TableHead>{t("thNextBilling")}</TableHead>
+              <TableHead>{t('thName')}</TableHead>
+              <TableHead>{t('thPrice')}</TableHead>
+              <TableHead>{t('thCycle')}</TableHead>
+              <TableHead>{t('thStatus')}</TableHead>
+              <TableHead>{t('thNextBilling')}</TableHead>
               <TableHead className="w-12" />
             </TableRow>
           </TableHeader>
@@ -147,7 +147,7 @@ export function SubscriptionsDataTable() {
     return (
       <div className="flex h-48 items-center justify-center rounded-lg border border-dashed">
         <p className="text-sm text-muted-foreground">
-          {t("failedToLoadSubscriptions")}
+          {t('failedToLoadSubscriptions')}
         </p>
       </div>
     );
@@ -169,9 +169,9 @@ export function SubscriptionsDataTable() {
                   variant="ghost"
                   size="sm"
                   className="-ml-3 h-8"
-                  onClick={() => toggleSort("name")}
+                  onClick={() => toggleSort('name')}
                 >
-                  {t("thName")}
+                  {t('thName')}
                   <ArrowUpDown className="ml-1 size-3.5" />
                 </Button>
               </TableHead>
@@ -180,27 +180,27 @@ export function SubscriptionsDataTable() {
                   variant="ghost"
                   size="sm"
                   className="-ml-3 h-8"
-                  onClick={() => toggleSort("price")}
+                  onClick={() => toggleSort('price')}
                 >
-                  {t("thPrice")}
+                  {t('thPrice')}
                   <ArrowUpDown className="ml-1 size-3.5" />
                 </Button>
               </TableHead>
-              <TableHead>{t("thCycle")}</TableHead>
-              <TableHead>{t("thStatus")}</TableHead>
+              <TableHead>{t('thCycle')}</TableHead>
+              <TableHead>{t('thStatus')}</TableHead>
               <TableHead>
                 <Button
                   variant="ghost"
                   size="sm"
                   className="-ml-3 h-8"
-                  onClick={() => toggleSort("next_billing_date")}
+                  onClick={() => toggleSort('next_billing_date')}
                 >
-                  {t("thNextBilling")}
+                  {t('thNextBilling')}
                   <ArrowUpDown className="ml-1 size-3.5" />
                 </Button>
               </TableHead>
               <TableHead className="w-12">
-                <span className="sr-only">{t("openMenu")}</span>
+                <span className="sr-only">{t('openMenu')}</span>
               </TableHead>
             </TableRow>
           </TableHeader>
@@ -209,7 +209,7 @@ export function SubscriptionsDataTable() {
               <TableRow>
                 <TableCell colSpan={6} className="h-48 text-center">
                   <p className="text-sm text-muted-foreground">
-                    {t("noSubscriptions")}
+                    {t('noSubscriptions')}
                   </p>
                 </TableCell>
               </TableRow>
@@ -235,33 +235,33 @@ export function SubscriptionsDataTable() {
                     </span>
                   </TableCell>
                   <TableCell>
-                    <Badge variant={statusVariants[sub.status] ?? "outline"}>
+                    <Badge variant={statusVariants[sub.status] ?? 'outline'}>
                       {statusLabels[sub.status] ?? sub.status}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-sm text-muted-foreground">
                     {sub.next_billing_date
-                      ? format(new Date(sub.next_billing_date), "MMM dd, yyyy")
-                      : "--"}
+                      ? format(new Date(sub.next_billing_date), 'MMM dd, yyyy')
+                      : '--'}
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button variant="ghost" size="icon" className="size-8">
                           <MoreHorizontal className="size-4" />
-                          <span className="sr-only">{t("openMenu")}</span>
+                          <span className="sr-only">{t('openMenu')}</span>
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuItem onClick={() => handleEdit(sub)}>
-                          {t("edit")}
+                          {t('edit')}
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem
                           className="text-destructive"
                           onClick={() => setDeleteTarget(sub)}
                         >
-                          {t("delete")}
+                          {t('delete')}
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -277,7 +277,7 @@ export function SubscriptionsDataTable() {
       {totalPages > 1 && (
         <div className="flex items-center justify-between px-2 pt-4">
           <p className="text-sm text-muted-foreground">
-            {t("pageOf", {
+            {t('pageOf', {
               current: currentPage,
               total: totalPages,
               count: total,
@@ -292,7 +292,7 @@ export function SubscriptionsDataTable() {
                 setParams((p) => ({ ...p, page: (p.page ?? 1) - 1 }))
               }
             >
-              {t("previous")}
+              {t('previous')}
             </Button>
             <span className="text-sm text-muted-foreground tabular-nums">
               {currentPage} / {totalPages}
@@ -305,7 +305,7 @@ export function SubscriptionsDataTable() {
                 setParams((p) => ({ ...p, page: (p.page ?? 1) + 1 }))
               }
             >
-              {t("next")}
+              {t('next')}
             </Button>
           </div>
         </div>
@@ -318,22 +318,22 @@ export function SubscriptionsDataTable() {
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>{t("deleteSubscription")}</AlertDialogTitle>
+            <AlertDialogTitle>{t('deleteSubscription')}</AlertDialogTitle>
             <AlertDialogDescription>
-              {t("deleteSubscriptionConfirm")}{" "}
+              {t('deleteSubscriptionConfirm')}{' '}
               <span className="font-medium text-foreground">
                 {deleteTarget?.name}
               </span>
-              {t("deleteSubscriptionWarning")}
+              {t('deleteSubscriptionWarning')}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
+            <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDelete}
               className="bg-destructive text-white hover:bg-destructive/70"
             >
-              {deleteMutation.isPending ? t("deleting") : t("delete")}
+              {deleteMutation.isPending ? t('deleting') : t('delete')}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

@@ -1,7 +1,7 @@
-import { getWebhooks } from "@/modules/webhook/actions/get-webhooks-action";
-import { apiClient } from "@/modules/shared/lib/api-client";
+import { apiClient } from '@/modules/shared/lib/api-client';
+import { getWebhooks } from '@/modules/webhook/actions/get-webhooks-action';
 
-jest.mock("@/modules/shared/lib/api-client", () => ({
+jest.mock('@/modules/shared/lib/api-client', () => ({
   apiClient: { get: jest.fn() },
 }));
 
@@ -9,7 +9,7 @@ beforeEach(() => jest.clearAllMocks());
 
 const mockPaginatedResponse = {
   success: true,
-  message: "OK",
+  message: 'OK',
   data: {
     webhooks: [],
     total: 0,
@@ -19,18 +19,18 @@ const mockPaginatedResponse = {
   },
 };
 
-describe("getWebhooks", () => {
-  it("calls apiClient.get with the correct URL", async () => {
+describe('getWebhooks', () => {
+  it('calls apiClient.get with the correct URL', async () => {
     (apiClient.get as jest.Mock).mockResolvedValue({
       data: mockPaginatedResponse,
     });
 
     await getWebhooks();
 
-    expect(apiClient.get).toHaveBeenCalledWith("/api/web/v1/webhooks");
+    expect(apiClient.get).toHaveBeenCalledWith('/api/web/v1/webhooks');
   });
 
-  it("returns the API response data", async () => {
+  it('returns the API response data', async () => {
     (apiClient.get as jest.Mock).mockResolvedValue({
       data: mockPaginatedResponse,
     });

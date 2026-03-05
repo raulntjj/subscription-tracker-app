@@ -1,14 +1,14 @@
-import { useAuthStore } from "@/modules/auth/store/auth-store";
-import type { User } from "@/modules/auth/types/auth-types";
+import type { User } from '@/modules/auth/types/auth-types';
+import { useAuthStore } from '@/modules/auth/store/auth-store';
 
 const mockUser: User = {
-  id: "1",
-  name: "John",
-  surname: "Doe",
-  email: "john@example.com",
+  id: '1',
+  name: 'John',
+  surname: 'Doe',
+  email: 'john@example.com',
   profile_path: null,
-  created_at: "2024-01-01T00:00:00Z",
-  updated_at: "2024-01-01T00:00:00Z",
+  created_at: '2024-01-01T00:00:00Z',
+  updated_at: '2024-01-01T00:00:00Z',
 };
 
 beforeEach(() => {
@@ -19,15 +19,15 @@ beforeEach(() => {
   });
 });
 
-describe("useAuthStore", () => {
-  it("has the correct initial state", () => {
+describe('useAuthStore', () => {
+  it('has the correct initial state', () => {
     const state = useAuthStore.getState();
     expect(state.user).toBeNull();
     expect(state.isAuthenticated).toBe(false);
     expect(state.isLoading).toBe(true);
   });
 
-  it("setUser sets user and isAuthenticated=true and isLoading=false", () => {
+  it('setUser sets user and isAuthenticated=true and isLoading=false', () => {
     const { setUser } = useAuthStore.getState();
     setUser(mockUser);
 
@@ -37,7 +37,7 @@ describe("useAuthStore", () => {
     expect(state.isLoading).toBe(false);
   });
 
-  it("clearUser resets user, isAuthenticated, and isLoading", () => {
+  it('clearUser resets user, isAuthenticated, and isLoading', () => {
     useAuthStore.setState({
       user: mockUser,
       isAuthenticated: true,
@@ -53,7 +53,7 @@ describe("useAuthStore", () => {
     expect(state.isLoading).toBe(false);
   });
 
-  it("setLoading toggles the isLoading flag", () => {
+  it('setLoading toggles the isLoading flag', () => {
     const { setLoading } = useAuthStore.getState();
     setLoading(false);
     expect(useAuthStore.getState().isLoading).toBe(false);
