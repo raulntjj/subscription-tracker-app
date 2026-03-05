@@ -18,18 +18,16 @@ const eslintConfig = [
       "@typescript-eslint": tseslint,
     },
     rules: {
-      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_" },
+      ],
       "@typescript-eslint/no-explicit-any": "warn",
       "no-console": "warn",
     },
   },
   {
-    ignores: [
-      ".next/**",
-      "node_modules/**",
-      "coverage/**",
-      "__mocks__/**",
-    ],
+    ignores: [".next/**", "node_modules/**", "coverage/**", "__mocks__/**"],
   },
 ];
 

@@ -326,9 +326,7 @@ export function SubscriptionForm({ initialData, onClose }: Props) {
             )}
           />
           {errors.status && (
-            <p className="text-xs text-destructive">
-              {errors.status.message}
-            </p>
+            <p className="text-xs text-destructive">{errors.status.message}</p>
           )}
         </div>
       </div>
