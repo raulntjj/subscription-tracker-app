@@ -214,7 +214,7 @@ export function SubscriptionsDataTable() {
                 </TableCell>
               </TableRow>
             ) : (
-              subscriptions.map((sub) => (
+              subscriptions.map((sub: Subscription) => (
                 <TableRow key={sub.id}>
                   <TableCell>
                     <div className="flex flex-col">
@@ -331,7 +331,7 @@ export function SubscriptionsDataTable() {
             <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDelete}
-              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+              className="bg-destructive text-white hover:bg-destructive/70"
             >
               {deleteMutation.isPending ? t("deleting") : t("delete")}
             </AlertDialogAction>

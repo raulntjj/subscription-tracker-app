@@ -1,0 +1,10 @@
+#!/bin/bash
+
+CONTAINER_NAME="subs-tracker-frontend"
+
+if [ $# -eq 0 ]; then
+    docker exec -it ${CONTAINER_NAME} bash
+else
+    # Executa o comando passado como argumento
+    docker exec -it ${CONTAINER_NAME} "$@"
+fi

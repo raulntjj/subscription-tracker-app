@@ -38,6 +38,7 @@ export function LanguageSwitcher() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
+        <DropdownMenuItem disabled>{t("languageSelectLabel")}</DropdownMenuItem>
         {localeOptions.map((option) => (
           <DropdownMenuItem
             key={option.value}

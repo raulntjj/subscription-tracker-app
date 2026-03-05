@@ -48,6 +48,7 @@ const en = {
 
   // -- Language --
   changeLanguage: "Change language",
+  languageSelectLabel: "Select a language",
 };
 
 export type SharedDictionary = typeof en;
