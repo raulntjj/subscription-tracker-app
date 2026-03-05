@@ -1,15 +1,15 @@
-import { webhookKeys } from "@/modules/webhook/hooks/use-queries";
+import { webhookKeys } from '@/modules/webhook/hooks/use-queries';
 
-describe("webhookKeys", () => {
+describe('webhookKeys', () => {
   it("all returns ['webhooks']", () => {
-    expect(webhookKeys.all).toEqual(["webhooks"]);
+    expect(webhookKeys.all).toEqual(['webhooks']);
   });
 
   it("lists() returns the 'list' key under 'webhooks'", () => {
-    expect(webhookKeys.lists()).toEqual(["webhooks", "list"]);
+    expect(webhookKeys.lists()).toEqual(['webhooks', 'list']);
   });
 
   it("detail(id) returns the 'detail' key with the id under 'webhooks'", () => {
-    expect(webhookKeys.detail(42)).toEqual(["webhooks", "detail", 42]);
+    expect(webhookKeys.detail(42)).toEqual(['webhooks', 'detail', 42]);
   });
 });

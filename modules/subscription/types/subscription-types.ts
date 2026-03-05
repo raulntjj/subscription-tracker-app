@@ -1,24 +1,24 @@
 export const SubscriptionStatus = {
-  ACTIVE: "active",
-  PAUSED: "paused",
-  CANCELLED: "cancelled",
+  ACTIVE: 'active',
+  PAUSED: 'paused',
+  CANCELLED: 'cancelled',
 } as const;
 
 export type SubscriptionStatus =
   (typeof SubscriptionStatus)[keyof typeof SubscriptionStatus];
 
 export const SubscriptionCurrency = {
-  BRL: "BRL",
-  USD: "USD",
-  EUR: "EUR",
+  BRL: 'BRL',
+  USD: 'USD',
+  EUR: 'EUR',
 } as const;
 
 export type SubscriptionCurrency =
   (typeof SubscriptionCurrency)[keyof typeof SubscriptionCurrency];
 
 export const BillingCycle = {
-  MONTHLY: "monthly",
-  YEARLY: "yearly",
+  MONTHLY: 'monthly',
+  YEARLY: 'yearly',
 } as const;
 
 export type BillingCycle = (typeof BillingCycle)[keyof typeof BillingCycle];

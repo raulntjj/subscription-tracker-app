@@ -1,33 +1,33 @@
-import tseslint from "@typescript-eslint/eslint-plugin";
-import tsparser from "@typescript-eslint/parser";
+import tsparser from '@typescript-eslint/parser';
+import tseslint from '@typescript-eslint/eslint-plugin';
 
 const eslintConfig = [
   {
-    files: ["**/*.ts", "**/*.tsx"],
+    files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
       parser: tsparser,
       parserOptions: {
-        ecmaVersion: "latest",
-        sourceType: "module",
+        ecmaVersion: 'latest',
+        sourceType: 'module',
         ecmaFeatures: {
           jsx: true,
         },
       },
     },
     plugins: {
-      "@typescript-eslint": tseslint,
+      '@typescript-eslint': tseslint,
     },
     rules: {
-      "@typescript-eslint/no-unused-vars": [
-        "warn",
-        { argsIgnorePattern: "^_" },
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_' },
       ],
-      "@typescript-eslint/no-explicit-any": "warn",
-      "no-console": "warn",
+      '@typescript-eslint/no-explicit-any': 'warn',
+      'no-console': 'warn',
     },
   },
   {
-    ignores: [".next/**", "node_modules/**", "coverage/**", "__mocks__/**"],
+    ignores: ['.next/**', 'node_modules/**', 'coverage/**', '__mocks__/**'],
   },
 ];
 

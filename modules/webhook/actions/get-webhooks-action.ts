@@ -1,11 +1,11 @@
-import { apiClient } from "@/modules/shared/lib/api-client";
+import { apiClient } from '@/modules/shared/lib/api-client';
+import type { WebhookConfig } from '@/modules/webhook/types/webhook-types';
 import type {
   ApiResponse,
   PaginatedData,
-} from "@/modules/shared/types/api-types";
-import type { WebhookConfig } from "@/modules/webhook/types/webhook-types";
+} from '@/modules/shared/types/api-types';
 
-const BASE_URL = "/api/web/v1/webhooks";
+const BASE_URL = '/api/web/v1/webhooks';
 
 // A API retorna: { success, message, data: { webhooks: [...], total, ... } }
 type WebhooksPaginatedData = PaginatedData<{ webhooks: WebhookConfig[] }>;

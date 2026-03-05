@@ -1,28 +1,25 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { useLogout } from "@/modules/auth/hooks/use-commands";
-import { useAuthStore } from "@/modules/auth/store/auth-store";
-import { useTranslation } from "@/modules/shared/hooks/use-translation";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   ChevronsUpDown,
   Coins,
   CreditCard,
   LogOut,
   Webhook,
-} from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+} from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 import {
   Sidebar,
   SidebarContent,
@@ -35,12 +32,16 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar";
+} from '@/components/ui/sidebar';
+
+import { useLogout } from '@/modules/auth/hooks/use-commands';
+import { useAuthStore } from '@/modules/auth/store/auth-store';
+import { useTranslation } from '@/modules/shared/hooks/use-translation';
 
 function getInitials(name?: string | null, surname?: string | null): string {
-  const first = name?.charAt(0) ?? "";
-  const last = surname?.charAt(0) ?? "";
-  return (first + last).toUpperCase() || "?";
+  const first = name?.charAt(0) ?? '';
+  const last = surname?.charAt(0) ?? '';
+  return (first + last).toUpperCase() || '?';
 }
 
 export function AppSidebar() {
@@ -68,10 +69,10 @@ export function AppSidebar() {
                   </div>
                   <div className="flex flex-col gap-0.5 leading-none">
                     <span className="font-semibold text-foreground">
-                      {t("appName")}
+                      {t('appName')}
                     </span>
                     <span className="text-xs text-muted-foreground">
-                      {t("appTagline")}
+                      {t('appTagline')}
                     </span>
                   </div>
                 </Link>
@@ -88,13 +89,13 @@ export function AppSidebar() {
 
   const navItems = [
     {
-      label: t("navSubscriptions"),
-      href: "/subscriptions",
+      label: t('navSubscriptions'),
+      href: '/subscriptions',
       icon: CreditCard,
     },
     {
-      label: t("navWebhooks"),
-      href: "/webhooks",
+      label: t('navWebhooks'),
+      href: '/webhooks',
       icon: Webhook,
     },
   ];
@@ -111,10 +112,10 @@ export function AppSidebar() {
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
                   <span className="font-semibold text-foreground">
-                    {t("appName")}
+                    {t('appName')}
                   </span>
                   <span className="text-xs text-muted-foreground">
-                    {t("appTagline")}
+                    {t('appTagline')}
                   </span>
                 </div>
               </Link>
@@ -125,7 +126,7 @@ export function AppSidebar() {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>{t("navigation")}</SidebarGroupLabel>
+          <SidebarGroupLabel>{t('navigation')}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {navItems.map((item) => (
@@ -159,7 +160,7 @@ export function AppSidebar() {
                   <Avatar className="size-8 rounded-lg">
                     <AvatarImage
                       src={user?.profile_path ?? undefined}
-                      alt={user?.name ?? "User"}
+                      alt={user?.name ?? 'User'}
                     />
                     <AvatarFallback className="rounded-lg bg-primary/10 text-xs font-medium text-primary">
                       {getInitials(user?.name, user?.surname)}
@@ -168,13 +169,13 @@ export function AppSidebar() {
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-semibold">
                       {isLoading
-                        ? t("loading")
+                        ? t('loading')
                         : user
                           ? `${user.name} ${user.surname}`
-                          : t("guest")}
+                          : t('guest')}
                     </span>
                     <span className="truncate text-xs text-muted-foreground">
-                      {user?.email ?? ""}
+                      {user?.email ?? ''}
                     </span>
                   </div>
                   <ChevronsUpDown className="ml-auto size-4" />
@@ -190,7 +191,7 @@ export function AppSidebar() {
                   <Avatar className="size-8 rounded-lg">
                     <AvatarImage
                       src={user?.profile_path ?? undefined}
-                      alt={user?.name ?? "User"}
+                      alt={user?.name ?? 'User'}
                     />
                     <AvatarFallback className="rounded-lg bg-primary/10 text-xs font-medium text-primary">
                       {getInitials(user?.name, user?.surname)}
@@ -198,10 +199,10 @@ export function AppSidebar() {
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-semibold">
-                      {user ? `${user.name} ${user.surname}` : ""}
+                      {user ? `${user.name} ${user.surname}` : ''}
                     </span>
                     <span className="truncate text-xs text-muted-foreground">
-                      {user?.email ?? ""}
+                      {user?.email ?? ''}
                     </span>
                   </div>
                 </div>
@@ -212,7 +213,7 @@ export function AppSidebar() {
                   className="text-destructive-foreground focus:text-destructive-foreground"
                 >
                   <LogOut className="mr-2 size-4" />
-                  {isLoggingOut ? t("signingOut") : t("signOut")}
+                  {isLoggingOut ? t('signingOut') : t('signOut')}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

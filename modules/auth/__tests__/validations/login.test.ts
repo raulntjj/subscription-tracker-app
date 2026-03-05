@@ -1,18 +1,18 @@
-import { loginSchema } from "@/modules/auth/lib/validations/login";
+import { loginSchema } from '@/modules/auth/lib/validations/login';
 
-describe("loginSchema", () => {
-  it("accepts a valid email and password", () => {
+describe('loginSchema', () => {
+  it('accepts a valid email and password', () => {
     const result = loginSchema.safeParse({
-      email: "user@example.com",
-      password: "secret",
+      email: 'user@example.com',
+      password: 'secret',
     });
     expect(result.success).toBe(true);
   });
 
-  it("rejects an invalid email", () => {
+  it('rejects an invalid email', () => {
     const result = loginSchema.safeParse({
-      email: "not-an-email",
-      password: "secret",
+      email: 'not-an-email',
+      password: 'secret',
     });
     expect(result.success).toBe(false);
     if (!result.success) {
@@ -20,10 +20,10 @@ describe("loginSchema", () => {
     }
   });
 
-  it("rejects an empty password", () => {
+  it('rejects an empty password', () => {
     const result = loginSchema.safeParse({
-      email: "user@example.com",
-      password: "",
+      email: 'user@example.com',
+      password: '',
     });
     expect(result.success).toBe(false);
     if (!result.success) {
@@ -31,7 +31,7 @@ describe("loginSchema", () => {
     }
   });
 
-  it("rejects when both fields are missing", () => {
+  it('rejects when both fields are missing', () => {
     const result = loginSchema.safeParse({});
     expect(result.success).toBe(false);
   });

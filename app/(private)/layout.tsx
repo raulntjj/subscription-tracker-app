@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useMe } from "@/modules/auth/hooks/use-queries";
-import { AppSidebar } from "@/modules/shared/components/layouts/app-sidebar";
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { useMe } from '@/modules/auth/hooks/use-queries';
+import { AppSidebar } from '@/modules/shared/components/layouts/app-sidebar';
 
 export default function PrivateLayout({
   children,

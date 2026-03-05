@@ -1,4 +1,3 @@
-// Baseado no ApiResponse.php do Laravel
 export interface ApiResponse<T = unknown> {
   success: boolean;
   message: string;
@@ -19,5 +18,5 @@ export interface PaginationParams {
   per_page?: number;
   search?: string;
   sort_by?: string;
-  sort_direction?: "asc" | "desc";
+  sort_direction?: 'asc' | 'desc';
 }

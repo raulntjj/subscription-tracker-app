@@ -11,11 +11,11 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  NODE_VERSION: "20"
+  NODE_VERSION: '20'
 
 jobs:
   lint:
-    name: "Lint & Format"
+    name: 'Lint & Format'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -25,7 +25,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "npm"
+          cache: 'npm'
           cache-dependency-path: package-lock.json
 
       - name: Install dependencies
@@ -38,7 +38,7 @@ jobs:
         run: npm run format:check
 
   typecheck:
-    name: "TypeScript Check"
+    name: 'TypeScript Check'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -48,7 +48,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "npm"
+          cache: 'npm'
           cache-dependency-path: package-lock.json
 
       - name: Install dependencies
@@ -58,7 +58,7 @@ jobs:
         run: npx tsc --noEmit
 
   tests:
-    name: "Tests"
+    name: 'Tests'
     runs-on: ubuntu-latest
     needs: [lint, typecheck]
     steps:
@@ -69,7 +69,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "npm"
+          cache: 'npm'
           cache-dependency-path: package-lock.json
 
       - name: Install dependencies
@@ -79,7 +79,7 @@ jobs:
         run: npm run test -- --ci --passWithNoTests
 
   coverage:
-    name: "Coverage Report"
+    name: 'Coverage Report'
     runs-on: ubuntu-latest
     needs: tests
     steps:
@@ -90,7 +90,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "npm"
+          cache: 'npm'
           cache-dependency-path: package-lock.json
 
       - name: Install dependencies
@@ -108,7 +108,7 @@ jobs:
           retention-days: 7
 
   build:
-    name: "Build"
+    name: 'Build'
     runs-on: ubuntu-latest
     needs: [lint, typecheck]
     steps:
@@ -119,7 +119,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "npm"
+          cache: 'npm'
           cache-dependency-path: package-lock.json
 
       - name: Install dependencies
