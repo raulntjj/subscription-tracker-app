@@ -17,7 +17,7 @@ export function useCreateWebhook() {
 
   return useMutation({
     mutationFn: (payload: WebhookFormData) => createWebhook(payload),
-    onSuccess: (response: ApiResponse<{ webhook: WebhookConfig }>) => {
+    onSuccess: (response: ApiResponse<WebhookConfig>) => {
       queryClient.invalidateQueries({ queryKey: webhookKeys.lists() });
       toast.success(response.message);
     },
@@ -33,7 +33,7 @@ export function useUpdateWebhook() {
   return useMutation({
     mutationFn: ({ id, payload }: { id: number; payload: WebhookFormData }) =>
       updateWebhook(id, payload),
-    onSuccess: (response: ApiResponse<{ webhook: WebhookConfig }>) => {
+    onSuccess: (response: ApiResponse<WebhookConfig>) => {
       queryClient.invalidateQueries({ queryKey: webhookKeys.all });
       toast.success(response.message);
     },

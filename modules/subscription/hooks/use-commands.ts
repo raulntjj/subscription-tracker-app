@@ -16,7 +16,7 @@ export function useCreateSubscription() {
 
   return useMutation({
     mutationFn: (payload: SubscriptionFormData) => createSubscription(payload),
-    onSuccess: (response: ApiResponse<{ subscription: Subscription }>) => {
+    onSuccess: (response: ApiResponse<Subscription>) => {
       queryClient.invalidateQueries({ queryKey: subscriptionKeys.lists() });
       queryClient.invalidateQueries({ queryKey: subscriptionKeys.budget() });
       toast.success(response.message);
@@ -38,7 +38,7 @@ export function useUpdateSubscription() {
       id: number;
       payload: SubscriptionFormData;
     }) => updateSubscription(id, payload),
-    onSuccess: (response: ApiResponse<{ subscription: Subscription }>) => {
+    onSuccess: (response: ApiResponse<Subscription>) => {
       queryClient.invalidateQueries({ queryKey: subscriptionKeys.lists() });
       queryClient.invalidateQueries({ queryKey: subscriptionKeys.budget() });
       toast.success(response.message);
