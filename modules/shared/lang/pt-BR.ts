@@ -50,6 +50,7 @@ const ptBR: SharedDictionary = {
 
   // -- Language --
   changeLanguage: "Alterar idioma",
+  languageSelectLabel: "Selecione um idioma",
 };
 
 export default ptBR;
