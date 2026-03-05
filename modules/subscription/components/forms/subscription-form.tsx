@@ -250,7 +250,7 @@ export function SubscriptionForm({ initialData, onClose }: Props) {
           />
           {errors.currency && (
             <p className="text-xs text-destructive">
-              {(errors.currency as any).message}
+              {errors.currency.message}
             </p>
           )}
         </div>
@@ -302,7 +302,7 @@ export function SubscriptionForm({ initialData, onClose }: Props) {
           />
           {errors.billing_cycle && (
             <p className="text-xs text-destructive">
-              {(errors.billing_cycle as any).message}
+              {errors.billing_cycle.message}
             </p>
           )}
         </div>
@@ -327,7 +327,7 @@ export function SubscriptionForm({ initialData, onClose }: Props) {
           />
           {errors.status && (
             <p className="text-xs text-destructive">
-              {(errors.status as any).message}
+              {errors.status.message}
             </p>
           )}
         </div>

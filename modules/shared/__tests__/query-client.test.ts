@@ -25,6 +25,7 @@ describe("getQueryClient", () => {
     expect(typeof client.setQueryData).toBe("function");
     expect(typeof client.clear).toBe("function");
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (global as any).window = original;
   });
 });

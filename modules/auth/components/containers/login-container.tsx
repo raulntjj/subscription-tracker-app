@@ -2,7 +2,7 @@
 
 import { LoginForm } from "@/modules/auth/components/forms/login-form";
 import { useTranslation } from "@/modules/shared/hooks/use-translation";
-import { Coins, GalleryVerticalEnd } from "lucide-react";
+import { Coins } from "lucide-react";
 
 export function LoginContainer() {
   const { t } = useTranslation();

@@ -20,10 +20,10 @@ export function useLogin() {
     onSuccess: async (response) => {
       toast.success(response.message || "Bem-vindo de volta!");
       if (response.data) {
-        const user = (response.data as any).user;
-        if (user) {
-          setUser(user);
-          queryClient.setQueryData(authKeys.me(), { data: user });
+        const data = response.data as { user?: { id: number; name: string; email: string } };
+        if (data.user) {
+          setUser(data.user);
+          queryClient.setQueryData(authKeys.me(), { data: data.user });
         }
       }
       router.push("/subscriptions");
@@ -51,10 +51,10 @@ export function useRegister() {
     onSuccess: async (response) => {
       toast.success(response.message || "Conta criada com sucesso");
       if (response.data) {
-        const user = (response.data as any).user;
-        if (user) {
-          setUser(user);
-          queryClient.setQueryData(authKeys.me(), { data: user });
+        const data = response.data as { user?: { id: number; name: string; email: string } };
+        if (data.user) {
+          setUser(data.user);
+          queryClient.setQueryData(authKeys.me(), { data: data.user });
         }
       }
       router.push("/subscriptions");

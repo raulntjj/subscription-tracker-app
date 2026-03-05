@@ -15,8 +15,10 @@ beforeEach(() => {
 describe("getToken", () => {
   it("returns undefined when on the server (no window)", () => {
     const original = global.window;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     delete (global as any).window;
     expect(getToken()).toBeUndefined();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (global as any).window = original;
   });
 

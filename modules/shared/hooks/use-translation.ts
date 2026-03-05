@@ -4,7 +4,7 @@ import authEn from "@/modules/auth/lang/en";
 import authPtBR from "@/modules/auth/lang/pt-BR";
 import sharedEn from "@/modules/shared/lang/en";
 import sharedPtBR from "@/modules/shared/lang/pt-BR";
-import { type Locale, useI18nStore } from "@/modules/shared/store/i18n-store";
+import { useI18nStore } from "@/modules/shared/store/i18n-store";
 import subEn from "@/modules/subscription/lang/en";
 import subPtBR from "@/modules/subscription/lang/pt-BR";
 import webhookEn from "@/modules/webhook/lang/en";
