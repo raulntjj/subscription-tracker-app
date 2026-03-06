@@ -24,6 +24,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
+import { formatDate } from '@/modules/shared/lib/utils';
 import { applyValidationErrors } from '@/modules/shared/lib/api-error';
 import { useTranslation } from '@/modules/shared/hooks/use-translation';
 import { type Subscription } from '@/modules/subscription/types/subscription-types';
@@ -353,7 +354,7 @@ export function SubscriptionForm({ initialData, onClose }: Props) {
                     )}
                   >
                     <CalendarIcon className="mr-2 size-4" />
-                    {isValidDate ? format(selectedDate, 'PPP') : t('pickADate')}
+                    {isValidDate ? formatDate(selectedDate) : t('pickADate')}
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">

@@ -43,8 +43,8 @@ export function WebhookForm({ initialData, onClose }: Props) {
   } = useForm<WebhookFormData>({
     resolver: zodResolver(webhookSchema),
     defaultValues: {
-      url: '',
-      secret: '',
+      url: undefined,
+      secret: undefined,
       is_active: true,
     },
   });
@@ -52,7 +52,7 @@ export function WebhookForm({ initialData, onClose }: Props) {
   useEffect(() => {
     if (initialData) {
       setValue('url', initialData.url);
-      setValue('secret', '');
+      setValue('secret', undefined);
       setValue('is_active', initialData.is_active);
     }
   }, [initialData, setValue]);
@@ -64,10 +64,8 @@ export function WebhookForm({ initialData, onClose }: Props) {
       } else {
         await createMutation.mutateAsync(data);
       }
-      // Fecha apenas no sucesso
       onClose?.();
     } catch (error) {
-      // Em 422, mapeia erros por campo — dialog continua aberto
       applyValidationErrors(error, setError);
     }
   };

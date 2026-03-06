@@ -32,6 +32,7 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 
+import { formatDate } from '@/modules/shared/lib/utils';
 import { useWebhooks } from '@/modules/webhook/hooks/use-queries';
 import { useTranslation } from '@/modules/shared/hooks/use-translation';
 import type { WebhookConfig } from '@/modules/webhook/types/webhook-types';
@@ -157,16 +158,7 @@ export function WebhooksDataTable() {
                     )}
                   </TableCell>
                   <TableCell className="text-sm text-muted-foreground">
-                    {webhook.created_at
-                      ? new Date(webhook.created_at).toLocaleDateString(
-                          'en-US',
-                          {
-                            month: 'short',
-                            day: '2-digit',
-                            year: 'numeric',
-                          }
-                        )
-                      : ''}
+                    {formatDate(webhook.created_at)}
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>

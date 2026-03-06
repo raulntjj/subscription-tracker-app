@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 
-import { format } from 'date-fns';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -33,6 +32,7 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 
+import { formatDate } from '@/modules/shared/lib/utils';
 import { useTranslation } from '@/modules/shared/hooks/use-translation';
 import type { PaginationParams } from '@/modules/shared/types/api-types';
 import { useSubscriptions } from '@/modules/subscription/hooks/use-queries';
@@ -240,9 +240,7 @@ export function SubscriptionsDataTable() {
                     </Badge>
                   </TableCell>
                   <TableCell className="text-sm text-muted-foreground">
-                    {sub.next_billing_date
-                      ? format(new Date(sub.next_billing_date), 'MMM dd, yyyy')
-                      : '--'}
+                    {formatDate(sub.next_billing_date)}
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>
