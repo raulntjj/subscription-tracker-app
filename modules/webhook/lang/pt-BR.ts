@@ -18,9 +18,23 @@ const ptBR: WebhookDictionary = {
   webhookUrl: 'URL do Webhook',
   secret: 'Segredo',
   isActive: 'Ativo',
+  platform: 'Plataforma',
+  platformDiscord: 'Discord',
+  platformSlack: 'Slack',
+  platformOther: 'Outro',
+  botName: 'Nome do Bot',
+  serverName: 'Nome do Servidor',
+  selectPlatform: 'Selecione uma plataforma',
+  autoFetchHint:
+    'Insira uma URL e tentaremos preencher os campos automaticamente.',
+  autoFetching: 'Buscando informacoes...',
+  autoFetchSuccess: 'Campos preenchidos automaticamente!',
+  autoFetchFailed:
+    'Nao foi possivel preencher automaticamente. Preencha manualmente.',
 
   // -- Table --
   thUrl: 'URL',
+  thPlatform: 'Plataforma',
   thStatus: 'Status',
   thCreated: 'Criado em',
   noWebhooks: 'Nenhum webhook configurado. Adicione o primeiro!',

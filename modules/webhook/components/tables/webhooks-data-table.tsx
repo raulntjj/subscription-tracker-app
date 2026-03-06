@@ -5,7 +5,13 @@ import { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { CheckCircle2, Loader2, MoreHorizontal, XCircle } from 'lucide-react';
+import {
+  CheckCircle2,
+  Disc2,
+  Loader2,
+  MoreHorizontal,
+  XCircle,
+} from 'lucide-react';
 import {
   Table,
   TableBody,
@@ -32,6 +38,7 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 
+import { formatDate } from '@/modules/shared/lib/utils';
 import { useWebhooks } from '@/modules/webhook/hooks/use-queries';
 import { useTranslation } from '@/modules/shared/hooks/use-translation';
 import type { WebhookConfig } from '@/modules/webhook/types/webhook-types';
@@ -70,6 +77,7 @@ export function WebhooksDataTable() {
           <TableHeader>
             <TableRow>
               <TableHead>{t('thUrl')}</TableHead>
+              <TableHead>{t('thPlatform')}</TableHead>
               <TableHead>{t('thStatus')}</TableHead>
               <TableHead>{t('thCreated')}</TableHead>
               <TableHead className="w-12" />
@@ -80,6 +88,9 @@ export function WebhooksDataTable() {
               <TableRow key={i}>
                 <TableCell>
                   <Skeleton className="h-4 w-64" />
+                </TableCell>
+                <TableCell>
+                  <Skeleton className="h-5 w-16 rounded-md" />
                 </TableCell>
                 <TableCell>
                   <Skeleton className="h-5 w-16 rounded-md" />
@@ -117,6 +128,7 @@ export function WebhooksDataTable() {
           <TableHeader>
             <TableRow>
               <TableHead>{t('thUrl')}</TableHead>
+              <TableHead>{t('thPlatform')}</TableHead>
               <TableHead>{t('thStatus')}</TableHead>
               <TableHead>{t('thCreated')}</TableHead>
               <TableHead className="w-12">
@@ -127,7 +139,7 @@ export function WebhooksDataTable() {
           <TableBody>
             {webhookList.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={4} className="h-48 text-center">
+                <TableCell colSpan={5} className="h-48 text-center">
                   <p className="text-sm text-muted-foreground">
                     {t('noWebhooks')}
                   </p>
@@ -141,7 +153,20 @@ export function WebhooksDataTable() {
                       <span className="font-medium truncate max-w-md">
                         {webhook.url}
                       </span>
+                      {webhook.bot_name && (
+                        <span className="text-xs text-muted-foreground truncate max-w-md">
+                          {webhook.bot_name}
+                          {webhook.server_name
+                            ? ` · ${webhook.server_name}`
+                            : ''}
+                        </span>
+                      )}
                     </div>
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant="outline" className="capitalize">
+                      {webhook.platform ?? 'other'}
+                    </Badge>
                   </TableCell>
                   <TableCell>
                     {webhook.is_active ? (
@@ -157,16 +182,7 @@ export function WebhooksDataTable() {
                     )}
                   </TableCell>
                   <TableCell className="text-sm text-muted-foreground">
-                    {webhook.created_at
-                      ? new Date(webhook.created_at).toLocaleDateString(
-                          'en-US',
-                          {
-                            month: 'short',
-                            day: '2-digit',
-                            year: 'numeric',
-                          }
-                        )
-                      : ''}
+                    {formatDate(webhook.created_at)}
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>
